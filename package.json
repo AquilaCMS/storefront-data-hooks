@@ -2,11 +2,22 @@
   "name": "@aquilacms/commerce-framework",
   "version": "1.0.0",
   "description": "Next.js Commerce Framework",
-  "main": "src/commerce/index.tsx",
+  "main": "index.js",
   "scripts": {
-    "clean": "rimraf *.js *.d.ts api cart commerce products scripts wishlist",
+    "clean": "rimraf *.js *.d.ts account api auth cart commerce products scripts wishlist",
     "build": "npm run clean && tsc"
   },
+  "files": [
+    "*.js",
+    "*.d.ts",
+    "account",
+    "api",
+    "auth",
+    "cart",
+    "commerce",
+    "products",
+    "wishlist"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/vercel/commerce-framework.git"

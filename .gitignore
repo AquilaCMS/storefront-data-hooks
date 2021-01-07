@@ -1,1 +1,11 @@
 node_modules
+*.js
+*.d.ts
+account
+api
+auth
+cart
+commerce
+products
+scripts
+wishlist
