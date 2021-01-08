@@ -4,8 +4,10 @@
   "description": "Next.js Commerce Framework",
   "main": "index.js",
   "scripts": {
-    "clean": "rimraf *.js *.d.ts account api auth cart commerce products scripts wishlist",
-    "build": "npm run clean && tsc"
+    "clean": "rimraf *.js *.d.ts api cart commerce products scripts wishlist",
+    "clean:install": "rimraf node_modules yarn.lock && yarn install",
+    "build": "npm run clean && tsc && cp src/schema.d.ts schema.d.ts",
+    "lint": "eslint './**/*.{js,ts,tsx}' --quiet --fix"
   },
   "files": [
     "*.js",
@@ -46,6 +48,14 @@
     "@types/lodash.debounce": "^4.0.6",
     "@types/node": "^14.14.20",
     "@types/react": "^17.0.0",
+    "@typescript-eslint/eslint-plugin": "^4.12.0",
+    "@typescript-eslint/parser": "^4.12.0",
+    "eslint": "^7.17.0",
+    "eslint-config-prettier": "^7.1.0",
+    "eslint-plugin-prettier": "^3.3.1",
+    "eslint-plugin-react": "^7.22.0",
+    "husky": "^4.3.7",
+    "lint-staged": "^10.5.3",
     "next": "^10.0.4",
     "prettier": "^2.2.1",
     "rimraf": "^3.0.2",
@@ -53,5 +63,15 @@
   },
   "peerDependencies": {
     "react": ">=17"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx}": [
+      "eslint --fix"
+    ]
   }
 }
