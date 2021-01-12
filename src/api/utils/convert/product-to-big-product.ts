@@ -48,7 +48,10 @@ export default function productToBigProduct(product: any, locale: string | undef
       edges: product?.attributes
         .filter((att: attributes) => TYPES.indexOf(att?.type) !== -1)
         .map((att: attributes) => {
-          console.log('ATTR : ', att)
+        let hexColors = null;
+        if (att?.value) {
+          hexColors = Array.isArray(att.value) ? att.value : [att.value];
+        }
         return {
           node: {
             __typename: 'MultipleChoiceOption',
@@ -59,7 +62,7 @@ export default function productToBigProduct(product: any, locale: string | undef
                   node: att.type === 'color' ? {
                     label: att.name ?? 'no name',
                     isDefault: false,
-                    hexColors: Array.isArray(att.value) ? att.value : [att.value]
+                    hexColors
                   } : {
                     label: att.name ?? 'no name'
                   }

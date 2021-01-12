@@ -1,5 +1,5 @@
 {
-  "name": "@aquilacms/commerce-framework",
+  "name": "@aquilacms/storefront-data-hooks",
   "version": "1.0.0",
   "description": "Next.js Commerce Framework",
   "main": "index.js",
@@ -22,7 +22,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vercel/commerce-framework.git"
+    "url": "git+https://github.com/aquilacms/storefront-data-hooks.git"
   },
   "keywords": [
     "nextjs",
@@ -31,9 +31,9 @@
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/vercel/commerce-framework/issues"
+    "url": "https://github.com/aquilacms/storefront-data-hooks/issues"
   },
-  "homepage": "https://github.com/vercel/commerce-framework#readme",
+  "homepage": "https://github.com/aquilacms/storefront-data-hooks#readme",
   "dependencies": {
     "@vercel/fetch": "6.1.0",
     "cookie": "0.4.1",

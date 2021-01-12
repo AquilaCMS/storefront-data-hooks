@@ -2,8 +2,7 @@ import type {
   GetAllProductsQuery,
   GetAllProductsQueryVariables,
 } from "../../schema";
-import type { RecursivePartial, RecursiveRequired } from "../utils/types";
-import filterEdges from "../utils/filter-edges";
+import type { RecursivePartial } from "../utils/types";
 import setProductLocaleMeta from "../utils/set-product-locale-meta";
 import { productConnectionFragment } from "../fragments/product";
 import { AquilacmsConfig, getConfig } from "..";
@@ -134,13 +133,6 @@ async function getAllProducts({
   };
   let products: any = await config.storeApiFetch('/v2/products', options);
   products = productsToBigProducts(products.datas, locale)
-
-  // const { data } = await config.fetch<RecursivePartial<GetAllProductsQuery>>(
-  //   query,
-  //   { variables }
-  // );
-  // const edges = data.site?.[field]?.edges;
-  // const products = filterEdges(edges as RecursiveRequired<typeof edges>);
 
   if (locale && config.applyLocale) {
     products.forEach((product: RecursivePartial<ProductEdge>) => {
