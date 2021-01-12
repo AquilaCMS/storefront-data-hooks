@@ -1,2 +1,9 @@
 node_modules
-example
+*.js
+*.d.ts
+api
+cart
+commerce
+products
+scripts
+wishlist
