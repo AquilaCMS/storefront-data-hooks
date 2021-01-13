@@ -123,6 +123,7 @@ async function getProduct({
       },
     }),
   };
+  console.log('/v2/product', config)
   let data = await config.storeApiFetch('/v2/product', options)
   const product = productToBigProduct(data, locale)
 
