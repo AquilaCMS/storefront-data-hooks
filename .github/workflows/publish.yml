@@ -1,4 +1,4 @@
-name: Publish sendcloud package
+name: Publish aquilacms storefront-data-hooks package
 on:
   release:
     types: [created]
