@@ -24,7 +24,6 @@ const DISPLAY_TYPES: any = {
 
 export default function productToBigProduct(product: any, locale: string | undefined): any {
   if (!product || !locale) return {}
-  console.log('PRODUCT : ', product)
   return {
     __typename: 'Product',
     entityId: product.code,

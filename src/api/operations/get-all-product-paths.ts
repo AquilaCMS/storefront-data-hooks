@@ -58,14 +58,44 @@ async function getAllProductPaths({
   config = getConfig(config);
   // RecursivePartial forces the method to check for every prop in the data, which is
   // required in case there's a custom `query`
-  const { data } = await config.fetch<
-    RecursivePartial<GetAllProductPathsQuery>
-  >(query, { variables });
-  const products = data.site?.products?.edges;
-
-  return {
-    products: filterEdges(products as RecursiveRequired<typeof products>),
-  };
+  const locale: any = config.locale?.split('-')[0]
+  const options = {
+    method: 'POST',
+    body: JSON.stringify({
+      PostBody: {
+        structure: {
+          translation: 1
+        },
+        limit: 200,
+        page: 1
+      }
+    })
+  }
+  const result: {
+    datas: any[],
+    count: number,
+    min: {
+      et: number,
+      ati: number
+    },
+    max: {
+      et: number,
+      ati: number
+    },
+    specialPriceMin: {
+      et: number,
+      ati: number
+    },
+    specialPriceMax: {
+      et: number,
+      ati: number
+    }
+  } = await config.storeApiFetch('/v2/products', options)
+  return {products: result.datas.map(p => {
+    return {
+      node: {slug: p.slug, locale, path: `/${p.slug[locale || 'en']}/`}
+    }
+  })}
 }
 
 export default getAllProductPaths;
