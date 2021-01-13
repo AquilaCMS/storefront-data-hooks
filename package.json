@@ -7,7 +7,8 @@
     "clean": "rimraf *.js *.d.ts api cart commerce products scripts wishlist",
     "clean:install": "rimraf node_modules yarn.lock && yarn install",
     "build": "npm run clean && tsc && cp src/schema.d.ts schema.d.ts",
-    "lint": "eslint . --quiet --fix --ext .js,.ts,.tsx"
+    "lint": "eslint . --quiet --ext .js,.ts,.tsx",
+    "lint:fix": "eslint . --quiet --fix --ext .js,.ts,.tsx"
   },
   "files": [
     "*.js",
