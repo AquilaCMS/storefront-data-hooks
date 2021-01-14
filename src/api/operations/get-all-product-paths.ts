@@ -6,6 +6,27 @@ import type { RecursivePartial, RecursiveRequired } from "../utils/types";
 import filterEdges from "../utils/filter-edges";
 import { AquilacmsConfig, getConfig } from "..";
 
+export type getAllProductsResultAquila = {
+  datas: any[],
+  count: number,
+  min: {
+    et: number,
+    ati: number
+  },
+  max: {
+    et: number,
+    ati: number
+  },
+  specialPriceMin: {
+    et: number,
+    ati: number
+  },
+  specialPriceMax: {
+    et: number,
+    ati: number
+  }
+}
+
 export const getAllProductPathsQuery = /* GraphQL */ `
   query getAllProductPaths($first: Int = 100) {
     site {
@@ -71,31 +92,17 @@ async function getAllProductPaths({
       }
     })
   }
-  const result: {
-    datas: any[],
-    count: number,
-    min: {
-      et: number,
-      ati: number
-    },
-    max: {
-      et: number,
-      ati: number
-    },
-    specialPriceMin: {
-      et: number,
-      ati: number
-    },
-    specialPriceMax: {
-      et: number,
-      ati: number
+  const result: getAllProductsResultAquila = await config.storeApiFetch('/v2/products', options)
+
+  return {
+    products: result.datas.map(p => {
+      return {
+        node: {
+          path: `/${p.slug[locale || 'en']}/`
+        }
+      }
     }
-  } = await config.storeApiFetch('/v2/products', options)
-  return {products: result.datas.map(p => {
-    return {
-      node: {slug: p.slug, locale, path: `/${p.slug[locale || 'en']}/`}
-    }
-  })}
+  )}
 }
 
 export default getAllProductPaths;
