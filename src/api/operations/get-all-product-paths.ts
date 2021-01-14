@@ -92,17 +92,22 @@ async function getAllProductPaths({
       }
     })
   }
-  const result: getAllProductsResultAquila = await config.storeApiFetch('/v2/products', options)
+  try {
+    const result: getAllProductsResultAquila = await config.storeApiFetch('/v2/products', options)
 
-  return {
-    products: result.datas.map(p => {
-      return {
-        node: {
-          path: `/${p.slug[locale || 'en']}/`
+    return {
+      products: result.datas.map(p => {
+        return {
+          node: {
+            path: `/${p.slug[locale || 'en']}/`
+          }
         }
       }
-    }
-  )}
+    )}
+  } catch (err) {
+    console.error(err)
+  }
+  return { products: [] }
 }
 
 export default getAllProductPaths;
