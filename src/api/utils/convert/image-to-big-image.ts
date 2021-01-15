@@ -1,17 +1,30 @@
 import { getConfig } from "../..";
+import { Image } from '../../../schema'
 
-export default function convertToBigImage(images: any) {
-    const allImages = [];
-    const config = getConfig()
-    for (let indexImg = 0; indexImg < images.length; indexImg++) {
-      const oneImage = images[indexImg];
-      allImages.push({
-        node: {
-          urlOriginal: `${config.commerceUrl}/${oneImage.url}`,
-          altText: oneImage.alt,
-          isDefault: oneImage.default,
-        },
-      });
-    }
-    return allImages;
+export type ImageAquila = {
+  url: string
+  alt: string
+  default: boolean
+}
+
+export default function convertToBigImage(images: ImageAquila[]): {
+  node: Pick<
+    Image,
+    "urlOriginal" | "altText" | "isDefault"
+  >
+}[] {
+  const allImages = [];
+  const config = getConfig()
+  for (let i = 0; i < images.length; i++) {
+    const oneImage = images[i];
+    allImages.push({
+      node: {
+        urlOriginal: `${config.commerceUrl}/${oneImage.url}`,
+        altText: oneImage.alt,
+        isDefault: oneImage.default,
+      },
+      cursor: ''
+    });
+  }
+  return allImages;
 };
