@@ -1,5 +1,3 @@
-import { ProductInfoFragment, ProductOptionConnection } from "src/schema";
-
 export declare type attributes = {
   type: string;
   position: number;

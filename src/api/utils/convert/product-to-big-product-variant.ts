@@ -1,4 +1,4 @@
-import { Image, ProductInfoFragment, GetProductQuery } from "src/schema";
+import { Image } from "src/schema";
 import productToProductOptions from "./product-to-product-options";
 import imageToBigImage from './image-to-big-image'
 
