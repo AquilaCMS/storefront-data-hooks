@@ -1,6 +1,6 @@
 {
   "name": "@aquilacms/storefront-data-hooks",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Next.js Commerce Framework",
   "main": "index.js",
   "scripts": {
