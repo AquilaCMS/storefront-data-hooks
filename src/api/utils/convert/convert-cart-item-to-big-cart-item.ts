@@ -5,8 +5,9 @@ export default function convertCartItemToBigCartItem(items: any[], type: string)
   return items
     .filter((item: any) => item.type === type)
     .map((item: any) => {
+      const image = item.id.images.find((i: any) => i.default);
       return {
-        id: item.id._id,
+        id: item._id,
         parent_id: null,
         variant_id: item.id._id,
         product_id: item.id._id,
@@ -15,7 +16,7 @@ export default function convertCartItemToBigCartItem(items: any[], type: string)
         url: `${config.commerceUrl}/${item.id.slug[config.locale ?? 'en']}`,
         quantity: item.quantity,
         taxable: true,
-        image_url: item.image,
+        image_url: `${config.commerceUrl}/images/products/150x150/${image._id}/${image.name}`,
         discounts: [],
         coupons: [],
         discount_amount: 0,

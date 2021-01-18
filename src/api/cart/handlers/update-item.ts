@@ -19,13 +19,13 @@ const updateItem: CartHandlers["updateItem"] = async ({
     method: "PUT",
     body: JSON.stringify({
       item: {
-        id: item.productId,
+        _id: itemId,
         quantity: item.quantity
       },
       cartId
     }),
   }
-  const result: any = await config.storeApiFetch('/v2/cart/item', options);
+  const result: any = await config.storeApiFetch('/v2/cart/updateqty', options);
   let data = convertCartToBigCart(result)
 
   // Update the cart cookie

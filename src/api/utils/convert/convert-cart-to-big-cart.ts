@@ -13,7 +13,7 @@ export default function convertCartToBigCart(cart: any): Cart {
       code: "EUR"
     },
     tax_included: true,
-    base_amount: cart.priceTotal.ati,
+    base_amount: cart.priceSubTotal.ati,
     discount_amount: 0,
     cart_amount: cart.priceTotal.ati,
     coupons: [],
@@ -25,6 +25,6 @@ export default function convertCartToBigCart(cart: any): Cart {
     },
     created_time: cart.createdAt,
     updated_time: cart.updatedAt,
-    locale: config.locale!
+    locale: config.locale ?? 'en'
   }
 }
