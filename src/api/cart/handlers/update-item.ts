@@ -1,6 +1,6 @@
-import { parseCartItem } from "../../utils/parse-item";
 import getCartCookie from "../../utils/get-cart-cookie";
 import type { CartHandlers } from "..";
+import convertCartToBigCart from "../../../api/utils/convert/convert-cart-to-big-cart";
 
 // Return current cart info
 const updateItem: CartHandlers["updateItem"] = async ({
@@ -15,15 +15,18 @@ const updateItem: CartHandlers["updateItem"] = async ({
     });
   }
 
-  const { data } = await config.storeApiFetch(
-    `/v3/carts/${cartId}/items/${itemId}`,
-    {
-      method: "PUT",
-      body: JSON.stringify({
-        line_item: parseCartItem(item),
-      }),
-    }
-  );
+  const options = {
+    method: "PUT",
+    body: JSON.stringify({
+      item: {
+        id: item.productId,
+        quantity: item.quantity
+      },
+      cartId
+    }),
+  }
+  const result: any = await config.storeApiFetch('/v2/cart/item', options);
+  let data = convertCartToBigCart(result)
 
   // Update the cart cookie
   res.setHeader(

@@ -1,5 +1,6 @@
 import getCartCookie from "../../utils/get-cart-cookie";
 import type { CartHandlers } from "..";
+import convertCartToBigCart from "../../../api/utils/convert/convert-cart-to-big-cart";
 
 // Return current cart info
 const removeItem: CartHandlers["removeItem"] = async ({
@@ -15,12 +16,12 @@ const removeItem: CartHandlers["removeItem"] = async ({
   }
 
   const result = await config.storeApiFetch<{ data: any } | null>(
-    `/v3/carts/${cartId}/items/${itemId}`,
+    `/v2/cart/${cartId}/item/${itemId}`,
     {
       method: "DELETE",
     }
   );
-  const data = result?.data ?? null;
+  let data = convertCartToBigCart(result) ?? null;
 
   res.setHeader(
     "Set-Cookie",

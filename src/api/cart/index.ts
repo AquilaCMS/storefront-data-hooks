@@ -21,11 +21,25 @@ export type UpdateItemBody = { itemId: string; item: ItemBody };
 
 export type RemoveItemBody = { itemId: string };
 
+export type CartCoupon = {
+  code: string;
+  id: string;
+  coupon_type:
+    | "per_item_discount"
+    | "percentage_discount"
+    | "per_total_discount"
+    | "shipping_discount"
+    | "free_shipping"
+    | "promotion";
+  discounted_amount: number;
+}
+
 // TODO: this type should match:
 // https://developer.bigcommerce.com/api-reference/cart-checkout/server-server-cart-api/cart/getacart#responses
 export type Cart = {
   id: string;
   parent_id?: string;
+  channel_id: number;
   customer_id: number;
   email: string;
   currency: { code: string };
@@ -39,6 +53,10 @@ export type Cart = {
     gift_certificates: any[];
     physical_items: any[];
   };
+  coupons?: CartCoupon[];
+  created_time: string;
+  updated_time: string;
+  locale: string;
   // TODO: add missing fields
 };
 

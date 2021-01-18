@@ -6,7 +6,7 @@ export default function productToBigProduct(product: any, locale: string | undef
   if (!product || !locale) return {}
   return {
     __typename: 'Product',
-    entityId: product.code,
+    entityId: product._id,
     name: product.name,
     path: `/${product?.slug[locale]}/`,
     description: product.description1?.text,
